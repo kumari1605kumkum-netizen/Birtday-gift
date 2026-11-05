@@ -67,9 +67,9 @@ img {
 
 <div class="page" id="p3">
 <h1>Three Little Surprises 🎁</h1>
-<button onclick="alert('You are my favourite person! ❤️')">Gift 1</button>
-<button onclick="alert('My favourite place is beside you! 🥰')">Gift 2</button>
-<button onclick="alert('I love you more every day! 💗')">Gift 3</button>
+<button onclick="showGift('You are my favourite person ❤️');
+<button onclick="showGift('My favourite place is beside you! 🥰');
+<button onclick="showGift('I love you more every day! ❤️');
 <br>
 <button onclick="go(4)">Our Photos 📸</button>
 </div>
@@ -120,7 +120,38 @@ function showPhotos(event) {
     let img = document.createElement('img');
     img.src = URL.createObjectURL(file);
     gallery.appendChild(img);
-  });
+  }
+  {function showGift(message) {
+  const overlay = document.createElement("div");
+  overlay.style.cssText = `
+    position:fixed; inset:0; background:rgba(30,0,25,0.85);
+    display:flex; justify-content:center; align-items:center;
+    z-index:9999; padding:20px;
+  `;
+
+  const card = document.createElement("div");
+  card.style.cssText = `
+    background:linear-gradient(135deg,#ffe0ec,#fff0f5);
+    padding:40px 25px; border-radius:25px;
+    text-align:center; max-width:350px;
+    box-shadow:0 0 35px #ff69a6;
+    font-family:Georgia,serif;
+  `;
+
+  card.innerHTML = `
+    <div style="font-size:55px">💗</div>
+    <h2 style="color:#c2185b">A little surprise for you</h2>
+    <p style="font-size:22px;color:#7b1745">${message}</p>
+    <div style="font-size:30px">💕 ✨ 💕</div>
+    <button id="closeGift" style="background:#c2185b;color:white;
+    border:0;padding:12px 30px;border-radius:25px;font-size:16px">
+    Close ❤️</button>
+  `;
+
+  overlay.appendChild(card);
+  document.body.appendChild(overlay);
+
+  card.querySelector("#closeGift").onclick = () => overlay.remove();
 }
 </script>
 </body>
